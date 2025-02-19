@@ -61,3 +61,22 @@ class SparseMatrix:
         else:
             self.num_rows = num_rows
             self.num_cols = num_cols
+    def get_element(self, row, col):
+        """Get element at specified position"""
+        if row < 0 or row >= self.num_rows or col < 0 or col >= self.num_cols:
+            raise IndexError("Matrix indices out of bounds")
+            
+        # Return 0 if element not found
+        return self.elements.get((row, col), 0)
+    
+    def set_element(self, row, col, value):
+        """Set element at specified position"""
+        if row < 0 or row >= self.num_rows or col < 0 or col >= self.num_cols:
+            raise IndexError("Matrix indices out of bounds")
+            
+        if value == 0:
+            # Remove zero elements to save memory
+            if (row, col) in self.elements:
+                del self.elements[(row, col)]
+        else:
+            self.elements[(row, col)] = value
