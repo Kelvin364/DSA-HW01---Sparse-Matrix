@@ -130,3 +130,42 @@ class SparseMatrix:
                 result.elements[(row, col)] = -value
                 
         return result
+    
+    def multiply(self, other):
+        """Multiply two matrices"""
+        # Check dimensions for matrix multiplication
+        if self.num_cols != other.num_rows:
+            raise ValueError("Number of columns in first matrix must equal number of rows in second matrix")
+            
+        # Create result matrix
+        result = SparseMatrix(num_rows=self.num_rows, num_cols=other.num_cols)
+        
+        # Perform multiplication only for non-zero elements
+        for (row1, col1), val1 in self.elements.items():
+            for (row2, col2), val2 in other.elements.items():
+                if col1 == row2:
+                    # Calculate product and add to result
+                    product = val1 * val2
+                    pos = (row1, col2)
+                    
+                    if pos in result.elements:
+                        result.elements[pos] += product
+                    else:
+                        result.elements[pos] = product
+                        
+                    # Remove if result is zero
+                    if result.elements[pos] == 0:
+                        del result.elements[pos]
+        
+        return result
+    
+    def save_to_file(self, filename):
+        """Save matrix to file"""
+        with open(filename, 'w') as file:
+            # Write dimensions
+            file.write(f"rows={self.num_rows}\n")
+            file.write(f"cols={self.num_cols}\n")
+            
+            # Write non-zero elements
+            for (row, col), value in sorted(self.elements.items()):
+                file.write(f"({row}, {col}, {value})\n")
