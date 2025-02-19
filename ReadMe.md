@@ -1,41 +1,38 @@
-***Sparse Matrix Implementation***
+# Sparse Matrix Implementation  
 
-This is the repository for my Data structures and algorithm Assignment
-That is in  charge of parsing and processing Matrix by providing a cli for performing these operations : 
-adding matrixes
-addition on them (make sure they have the same dimensions)
-substrcation on them (make sure they have the same dimensions)
-multiplication on them
-and after suggesting the putput directory 
+This repository contains the implementation of a **Sparse Matrix** parser and processor as part of a **Data Structures and Algorithms** assignment.  
+It provides a **CLI (Command Line Interface)** for performing the following matrix operations:  
 
-Example:
-Copyrows=8433
-cols=3180
-(0, 381, -694)
-(0, 128, -838)
-(0, 639, 857)
-Usage
+- **Addition** (Ensures both matrices have the same dimensions)  
+- **Subtraction** (Ensures both matrices have the same dimensions)  
+- **Multiplication**  
 
-Clone the repository:
-Copygit clone <repository-url>
+The program processes the matrices and allows you to specify an output directory for storing results.  
 
-Navigate to the project directory:
-Copycd sparse-matrix
+---
 
-Run the program:
-Copypython main.py
+## 📌 Example  
 
-Follow the on-screen prompts to:
+### Input:  
+```plaintext
+Rows = 8433, Cols = 3180  
+(0, 381, -694)  
+(0, 128, -838)  
+(0, 639, 857)  
 
-Select an operation (addition, subtraction, or multiplication)
+🚀 Usage
+1️⃣ Clone the repository
+
+git clone <repository-url>
+
+2️⃣ Navigate to the project directory
+
+cd sparse-matrix
+3️⃣ Run the program
+
+python main.py
+
+4️⃣ Follow the on-screen prompts:
+Select an operation (Addition, Subtraction, or Multiplication)
 Provide input file paths for the matrices
 Specify the output file path
-
-
-
-Implementation Details
-The implementation uses a dictionary to store matrix elements, with tuple keys (row, col) mapping to the element values. This approach:
-
-Only stores non-zero elements, making it memory-efficient
-Provides O(1) average-case lookup time
-Simplifies operations by only processing non-zero elements
