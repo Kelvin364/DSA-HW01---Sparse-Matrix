@@ -169,7 +169,7 @@ class SparseMatrix:
             # Write non-zero elements
             for (row, col), value in sorted(self.elements.items()):
                 file.write(f"({row}, {col}, {value})\n")
-    def main():
+def main():
     """Main function to handle matrix operations"""
     try:
         # Get operation type
@@ -224,3 +224,5 @@ class SparseMatrix:
 
 if __name__ == "__main__":
     main()
+
+      
