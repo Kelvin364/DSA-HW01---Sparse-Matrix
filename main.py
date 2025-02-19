@@ -80,3 +80,53 @@ class SparseMatrix:
                 del self.elements[(row, col)]
         else:
             self.elements[(row, col)] = value
+    
+    def add(self, other):
+        """Add two matrices"""
+        # Check dimensions
+        if self.num_rows != other.num_rows or self.num_cols != other.num_cols:
+            raise ValueError("Matrix dimensions must match for addition")
+            
+        # Create result matrix
+        result = SparseMatrix(num_rows=self.num_rows, num_cols=self.num_cols)
+        
+        # Copy all elements from first matrix
+        for (row, col), value in self.elements.items():
+            result.elements[(row, col)] = value
+            
+        # Add elements from second matrix
+        for (row, col), value in other.elements.items():
+            if (row, col) in result.elements:
+                result.elements[(row, col)] += value
+                # Remove if sum is zero
+                if result.elements[(row, col)] == 0:
+                    del result.elements[(row, col)]
+            else:
+                result.elements[(row, col)] = value
+                
+        return result
+    
+    def subtract(self, other):
+        """Subtract second matrix from first"""
+        # Check dimensions
+        if self.num_rows != other.num_rows or self.num_cols != other.num_cols:
+            raise ValueError("Matrix dimensions must match for subtraction")
+            
+        # Create result matrix
+        result = SparseMatrix(num_rows=self.num_rows, num_cols=self.num_cols)
+        
+        # Copy all elements from first matrix
+        for (row, col), value in self.elements.items():
+            result.elements[(row, col)] = value
+            
+        # Subtract elements from second matrix
+        for (row, col), value in other.elements.items():
+            if (row, col) in result.elements:
+                result.elements[(row, col)] -= value
+                # Remove if difference is zero
+                if result.elements[(row, col)] == 0:
+                    del result.elements[(row, col)]
+            else:
+                result.elements[(row, col)] = -value
+                
+        return result
