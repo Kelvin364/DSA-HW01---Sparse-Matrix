@@ -194,7 +194,7 @@ def main():
         # Get file paths
         matrix1_file = input("Enter first matrix file path: ")
         matrix2_file = input("Enter second matrix file path: ")
-        output_file = input("Enter output file path: ")
+        output_file = input("Enter the output file path start with ./output: ")
         
         # Load matrices
         try:
