@@ -169,3 +169,58 @@ class SparseMatrix:
             # Write non-zero elements
             for (row, col), value in sorted(self.elements.items()):
                 file.write(f"({row}, {col}, {value})\n")
+    def main():
+    """Main function to handle matrix operations"""
+    try:
+        # Get operation type
+        print("Matrix Operations:")
+        print("1. Addition")
+        print("2. Subtraction")
+        print("3. Multiplication")
+        choice = input("Enter your choice (1-3): ")
+        
+        operations = {
+            "1": "add",
+            "2": "subtract", 
+            "3": "multiply"
+        }
+        
+        if choice not in operations:
+            print("Invalid choice. Please enter 1, 2 or 3.")
+            return
+            
+        operation = operations[choice]
+        
+        # Get file paths
+        matrix1_file = input("Enter first matrix file path: ")
+        matrix2_file = input("Enter second matrix file path: ")
+        output_file = input("Enter output file path: ")
+        
+        # Load matrices
+        try:
+            matrix1 = SparseMatrix(matrix1_file)
+            matrix2 = SparseMatrix(matrix2_file)
+            
+            # Perform selected operation
+            if operation == "add":
+                result = matrix1.add(matrix2)
+            elif operation == "subtract":
+                result = matrix1.subtract(matrix2)
+            else:  # multiply
+                result = matrix1.multiply(matrix2)
+                
+            # Save result
+            result.save_to_file(output_file)
+            print(f"Operation completed successfully. Result saved to {output_file}")
+            
+        except FileNotFoundError as e:
+            print(f"Error: File not found")
+        except ValueError as e:
+            print(f"Error: {e}")
+            
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+if __name__ == "__main__":
+    main()
